@@ -6,7 +6,7 @@ Author          : PxDraft
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Copyright (c) 2018 - PxDraft
 ========================================================================*/
-  
+
 
 (function($){
     "use strict"
@@ -16,7 +16,7 @@ Copyright (c) 2018 - PxDraft
       * Pre Load
     ----------------------*/
     ALX.WebLoad = function(){
-      document.getElementById("loading").style.display = "none"; 
+    //   document.getElementById("loading").style.display = "none";
     }
 
 
@@ -137,10 +137,10 @@ Copyright (c) 2018 - PxDraft
               'Developer'
             ],
             breakLines: false
-        }); 
+        });
     }
 
-    
+
     // Window on Load
     $(window).on("load", function(){
       ALX.MasoNry(),

@@ -11,9 +11,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use smasif\ShurjopayLaravelPackage\ShurjopayService;
 
 class WebsiteController extends Controller
 {
+
+    public function payment()
+    {
+        $shurjopay_service = new ShurjopayService();
+        $tx_id = $shurjopay_service->generateTxId();
+        $success_route = route('order_success_message');
+        $shurjopay_service->sendPayment(5000, $success_route);
+    }
 
     public function index()
     {
@@ -38,7 +47,7 @@ class WebsiteController extends Controller
     }
     public function user_payment_information(Request $request, $registration_number)
     {
-    
+
         $item = UserInformation::where('registration_number', '=', $registration_number)->first();
         // dd($item);
         return view('layouts.user-information-submit', compact('item'));

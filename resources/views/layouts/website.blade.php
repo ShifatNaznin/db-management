@@ -30,7 +30,7 @@
     <!-- / -->
 
     <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" />
+    {{-- <link rel="icon" href="favicon.ico" /> --}}
     <!-- / -->
 
 
@@ -110,7 +110,7 @@
     <!-- custom -->
     <script src="{{asset('static')}}/js/custom.js"></script>
     @stack('js')
-    
+
 
 </body>
 

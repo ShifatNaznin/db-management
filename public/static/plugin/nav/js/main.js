@@ -4,7 +4,7 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2015, Codrops
  * http://www.codrops.com
  */
@@ -44,13 +44,13 @@
 		// the navigation wrapper
 		nav = document.querySelector('.pages-nav'),
 		// the menu nav items
-		navItems = [].slice.call(nav.querySelectorAll('.link--page')),
+		// navItems = [].slice.call(nav.querySelectorAll('.link--page')),
 		// check if menu is open
 		isMenuOpen = false;
 
 	function init() {
-		buildStack();
-		initEvents();
+		// buildStack();
+		// initEvents();
 	}
 
 	function buildStack() {
@@ -72,7 +72,7 @@
 				else {
 					// invisible pages in the stack
 					page.style.WebkitTransform = 'translate3d(0,75%,-300px)';
-					page.style.transform = 'translate3d(0,75%,-300px)';		
+					page.style.transform = 'translate3d(0,75%,-300px)';
 				}
 			}
 			else {
@@ -80,7 +80,7 @@
 			}
 
 			page.style.zIndex = i < current ? parseInt(current - i) : parseInt(pagesTotal + current - i);
-			
+
 			if( posIdx !== -1 ) {
 				page.style.opacity = parseFloat(1 - 0.1 * posIdx);
 			}
@@ -91,40 +91,40 @@
 	}
 
 	// event binding
-	function initEvents() {
-		// menu button click
-		menuCtrl.addEventListener('click', toggleMenu);
+	// function initEvents() {
+	// 	// menu button click
+	// 	// menuCtrl.addEventListener('click', toggleMenu);
 
-		// navigation menu clicks
-		navItems.forEach(function(item) {
-			// which page to open?
-			var pageid = item.getAttribute('href').slice(1);
-			item.addEventListener('click', function(ev) {
-				ev.preventDefault();
-				openPage(pageid);
-			});
-		});
+	// 	// navigation menu clicks
+	// 	navItems.forEach(function(item) {
+	// 		// which page to open?
+	// 		var pageid = item.getAttribute('href').slice(1);
+	// 		item.addEventListener('click', function(ev) {
+	// 			ev.preventDefault();
+	// 			openPage(pageid);
+	// 		});
+	// 	});
 
-		// clicking on a page when the menu is open triggers the menu to close again and open the clicked page
-		pages.forEach(function(page) {
-			var pageid = page.getAttribute('id');
-			page.addEventListener('click', function(ev) {
-				if( isMenuOpen ) {
-					ev.preventDefault();
-					openPage(pageid);
-				}
-			});
-		});
+	// 	// clicking on a page when the menu is open triggers the menu to close again and open the clicked page
+	// 	pages.forEach(function(page) {
+	// 		var pageid = page.getAttribute('id');
+	// 		page.addEventListener('click', function(ev) {
+	// 			if( isMenuOpen ) {
+	// 				ev.preventDefault();
+	// 				openPage(pageid);
+	// 			}
+	// 		});
+	// 	});
 
-		// keyboard navigation events
-		document.addEventListener( 'keydown', function( ev ) {
-			if( !isMenuOpen ) return; 
-			var keyCode = ev.keyCode || ev.which;
-			if( keyCode === 27 ) {
-				closeMenu();
-			}
-		} );
-	}
+	// 	// keyboard navigation events
+	// 	document.addEventListener( 'keydown', function( ev ) {
+	// 		if( !isMenuOpen ) return;
+	// 		var keyCode = ev.keyCode || ev.which;
+	// 		if( keyCode === 27 ) {
+	// 			closeMenu();
+	// 		}
+	// 	} );
+	// }
 
 	// toggle menu fn
 	function toggleMenu() {
@@ -183,7 +183,7 @@
 		if( id ) {
 			current = futureCurrent;
 		}
-		
+
 		// close menu..
 		classie.remove(menuCtrl, 'menu-button--open');
 		classie.remove(nav, 'pages-nav--open');
