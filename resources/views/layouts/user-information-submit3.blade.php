@@ -10,7 +10,7 @@
           <label for="">S.NO</label>
           <p class="validate form-control">{{ $item->id }}</p>
 
-          <input name="id" type="hidden" placeholder="Name" class="validate form-control" required=""
+          <input name="id" type="hidden" placeholder="Name" v-model="form_data.id" class="validate form-control" required=""
             value="{{ $item->id }}" />
         </div>
       </div>
@@ -18,7 +18,7 @@
         <div class="form-group">
           <label for="">Registration Number</label>
           <p class="validate form-control">{{ $item->registration_number }}</p>
-          <input name="registration_number" type="hidden" placeholder="Name" class="validate form-control" required=""
+          <input name="registration_number" type="hidden" placeholder="Name" v-model="form_data.registration_number" class="validate form-control" required=""
             value="{{ $item->registration_number }}" />
         </div>
       </div>
@@ -26,7 +26,7 @@
         <div class="form-group">
           <label for="">Ammount</label>
           <p class="validate form-control">{{ $item->ammount }}</p>
-          <input type="hidden" placeholder="Ammount" name="ammount" value="{{ $item->ammount }}"
+          <input type="hidden" placeholder="Ammount" name="ammount"  v-model="form_data.ammount" value="{{ $item->ammount }}"
             class="validate form-control" required="" />
           <span class="input-focus-effect theme-bg"></span>
         </div>
@@ -35,7 +35,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="">Full Name</label>
-          <input id="name" name="full_name" type="text" placeholder="Full Name" value="{{old('full_name')}}"
+          <input id="name" name="full_name" type="text" placeholder="Full Name" v-model="form_data.full_namet" value="{{old('full_name')}}"
             class="validate form-control" required="" />
           <span class="input-focus-effect theme-bg"></span>
         </div>
@@ -138,7 +138,7 @@
             methods:{
                 send_message: function(){
                     this.otp = Math.floor(1000 + Math.random() * 9000);
-                    console.log(this.phone, this.otp);
+                    // console.log(this.phone, this.otp);
 
                     let message = 'your otp confirmation number is ' + this.otp;
 
@@ -147,12 +147,12 @@
                             // handle success
                             if (response.data.api_response_message == "SUCCESS") {
                             } else {
-                                swal({
-                                    title: "Error",
-                                    text: "Enter a valid phone number with country code.",
-                                    type: "error",
-                                    timer: 3000,
-                                });
+                                // swal({
+                                //     title: "Error",
+                                //     text: "Enter a valid phone number with country code.",
+                                //     type: "error",
+                                //     timer: 3000,
+                                // });
                             }
                         })
                         .catch(function (error) {
@@ -172,15 +172,18 @@
 
                     axios.post('/user-information-submit', form_datas)
                         .then((res) => {
+                          // console.log(res);
                             window.location = '/give-payment/';
                         })
-                        .catch((err) => {
-                            let errors = err.response.data.errors;
+                        .catch((error) => {
+                            // let errors = err.response.data.errors;
+                            if(error.code == 422){
+                                  console.log(error.data)
+                              }
                         })
                 }
             }
         })
     }
 </script>
-@endpush
-@endsection
+@endpush @endsection
