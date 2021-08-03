@@ -92,37 +92,5 @@ class WebsiteController extends Controller
         // }
     }
 
-    public function contact_msg(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'message' => 'required',
-        ]);
-
-        $data = new ContactMessage();
-        $data->name = $request->name;
-        $data->email = $request->email;
-
-        $data->phone = $request->phone;
-        $data->message = $request->message;
-        $data->subject = $request->subject;
-
-        $data->save();
-
-        $send_email = 'shifatnaznin11@gmail.com';
-        // $send_email = ['bizdev@cyberfalcon4u.com', 'mcrezek@cloudfectiv.com'];
-        Mail::to($send_email)->send(new ContactMail($data));
-        Session::flash(
-            'success',
-            'Thank you for Subscribing'
-        );
-
-        if ($data) {
-            return back()->with('success', 'value');
-        } else {
-            return back()->with('error', 'value');
-        }
-    }
+   
 }
