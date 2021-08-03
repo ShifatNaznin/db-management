@@ -91,8 +91,8 @@
       <div class="col-md-12">
         <div class="send">
           <button v-if="!check_status" onclick="alert('your number not verified.')" disabled class="btn btn-primary"
-            type="button" name="send">Send</button>
-          <button v-else class="btn btn-theme" @click.prevent="submit_form()" type="button" name="send">Send</button>
+            type="button" name="send">Submit</button>
+          <button v-else class="btn btn-theme" @click.prevent="submit_form()" type="button" name="send">Submit</button>
         </div>
         <span class="output_message"></span>
       </div>
