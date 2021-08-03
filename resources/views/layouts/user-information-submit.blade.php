@@ -147,7 +147,7 @@
                     .then(function (response) {
                         // handle success
                         if (response.data.api_response_message == "SUCCESS") {
-                            return response;
+                          console.log(response.data);
                         } else {
                             swal({
                                 title: "Error",
