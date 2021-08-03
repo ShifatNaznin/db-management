@@ -156,7 +156,7 @@
                             }
                         })
                         .catch(function (error) {
-                            console.log(error);
+                            // console.log(error);
                         });
                 },
                 check_otp: function(){
