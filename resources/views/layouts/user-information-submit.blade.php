@@ -82,6 +82,7 @@
         </div>
       </div>
       <div class="col-md-12">
+        <label for="">Address</label>
         <div class="form-group">
           <textarea id="message" placeholder="Your Address" name="address" class="form-control" required=""></textarea>
           <span class="input-focus-effect theme-bg"></span>
