@@ -17,7 +17,7 @@
         <th>Division</th>
         <th>Status</th>
         <th>Ammount</th>
-        <th>Action</th>
+        {{-- <th>Action</th> --}}
       </tr>
     </thead>
     <tbody>
@@ -34,11 +34,11 @@
         <td>{{ $item->status }}</td>
         <td>{{ $item->ammount }}</td>
 
-        <td>
+        {{-- <td>
           <div class="send">
             <a href="{{route('user_payment_information',$item->registration_number)}}" class="btn btn-theme" type="submit"> Payment</a>
           </div>
-        </td>
+        </td> --}}
       </tr>
 
       @else
