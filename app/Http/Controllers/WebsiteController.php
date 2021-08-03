@@ -32,11 +32,12 @@ class WebsiteController extends Controller
     {
         // dd($request->all());
         $find = $request['registration_number'];
-        $data = UserInformation::where('registration_number', 'like', "%" . $find . "%")->get();
+        // $data = UserInformation::where('registration_number', 'like', "%" . $find . "%")->get();
+        $item = UserInformation::where('registration_number', '=', $find)->first();
         // dd($data);
-        if (sizeof($data)) {
-            Session::put('stepone', $data);
-            return view('layouts.user-information', compact('data'));
+        if ($item) {
+            Session::put('stepone', $item);
+            return view('layouts.user-information', compact('item'));
         } else {
             return back()->with('error', 'value');
         }

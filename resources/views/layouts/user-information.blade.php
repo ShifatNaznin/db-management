@@ -1,10 +1,7 @@
 @extends('layouts.website')
 @section('content')
 <div class="inner-section">
-  @forelse ($data as $item)
-  @php
-  // dd($item->status);
-  @endphp
+
   <table class="table table-hover">
     @if ($item->status == "Paid")
     <thead>
@@ -84,12 +81,7 @@
     </tbody>
   </table>
 
-  @empty
 
-  <div class="alert alert-danger" role="alert">
-    This is a danger alert with <a href="#" class="alert-link">No Registration Number Found!!</a>
-  </div>
-  @endforelse
 
 </div>
 
