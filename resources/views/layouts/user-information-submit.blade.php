@@ -146,6 +146,7 @@
                         .then(function (response) {
                             // handle success
                             if (response.data.api_response_message == "SUCCESS") {
+
                             } else {
                                 swal({
                                     title: "Error",
@@ -156,7 +157,7 @@
                             }
                         })
                         .catch(function (error) {
-                            // console.log(error);
+                            console.log(error);
                         });
                 },
                 check_otp: function(){

@@ -66,18 +66,7 @@ class WebsiteController extends Controller
         Session::put('user_information',$request->all());
 
         $data = UserInformation::find($request->id);
-        
-        $data->registration_number = $request->registration_number;
-        $data->full_name = $request->full_name;
-        $data->email = $request->email;
-        $data->phone = $request->phone;
-        $data->division = $request->division;
-        // $data->status = 'Paid';
-        $data->ammount = $request->ammount;
-        $data->otp = $request->otp;
-        $data->address = $request->address;
-
-        $data->save();
+     
         Session::put('user_amount',$data->ammount);
 
         // $data->registration_number = $request->registration_number;
