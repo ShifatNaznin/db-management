@@ -105,83 +105,86 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.8/dist/vue.js"></script>
 <script>
-  if (document.getElementById('confirmation')) {
-        const app = new Vue({
-            el: '#confirmation',
-            data: function(){
-                return {
-                    form_data: {
-                        id: null,
-                        registration_number: null,
-                        full_name: null,
-                        phone: null,
-                        email: null,
-                        division: null,
-                        status: null,
-                        ammount: null,
-                        otp: null,
-                        address: null,
-                    },
-                    phone: '',
-                    otp: '',
-                    otp_check_number: '',
-                    check_status: false,
-                    user_amount: '',
+  if (document.getElementById("confirmation")) {
+    const app = new Vue({
+        el: "#confirmation",
+        data: function () {
+            return {
+                form_data: {
+                    id: null,
+                    registration_number: null,
+                    full_name: null,
+                    phone: null,
+                    email: null,
+                    division: null,
+                    status: null,
+                    ammount: null,
+                    otp: null,
+                    address: null,
+                },
+                phone: "",
+                otp: "",
+                otp_check_number: "",
+                check_status: false,
+                user_amount: "",
+            };
+        },
+        created: function () {
+            // console.log('hi');
+            this.send_message();
+            this.check_otp();
+            this.submit_form();
+        },
+        methods: {
+            send_message: function () {
+                this.otp = Math.floor(1000 + Math.random() * 9000);
+                console.log(this.phone, this.otp);
+
+                let message = "your otp confirmation number is " + this.otp;
+
+                axios
+                    .get(`/Sms_gateway/send-single-sms.php?number=${this.phone}&message=${message}`)
+                    .then(function (response) {
+                        // handle success
+                        if (response.data.api_response_message == "SUCCESS") {
+                            return response;
+                        } else {
+                            swal({
+                                title: "Error",
+                                text: "Enter a valid phone number with country code.",
+                                type: "error",
+                                timer: 3000,
+                            });
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error.response);
+                    });
+            },
+            check_otp: function () {
+                if (this.otp_check_number != this.otp) {
+                    console.log("otp does not matched");
+                } else {
+                    // console.log('ok', this.otp_check_number);
+                    this.check_status = true;
                 }
             },
-            created: function () {
-                // console.log('hi');
-                this.send_message();
-                this.check_otp();
-                this.submit_form();
+            submit_form: function () {
+                let form_datas = new FormData($("#confirmation")[0]);
+
+                axios
+                    .post("/user-information-submit", form_datas)
+                    .then((res) => {
+                        window.location = "/give-payment/";
+                    })
+                    .catch((error) => {
+                        console.log(error.response);
+                    });
             },
-            methods:{
-                send_message: function(){
-                    this.otp = Math.floor(1000 + Math.random() * 9000);
-                    console.log(this.phone, this.otp);
+        },
+    });
+}
 
-                    let message = 'your otp confirmation number is ' + this.otp;
-
-                    axios.get(`/Sms_gateway/send-single-sms.php?number=${this.phone}&message=${message}`)
-                        .then(function (response) {
-                            // handle success
-                            if (response.data.api_response_message == "SUCCESS") {
-                              return response;
-                            } else {
-                                swal({
-                                    title: "Error",
-                                    text: "Enter a valid phone number with country code.",
-                                    type: "error",
-                                    timer: 3000,
-                                });
-                            }
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                },
-                check_otp: function(){
-                    if(this.otp_check_number != this.otp){
-                        console.log('otp does not matched');
-                    }else{
-                        // console.log('ok', this.otp_check_number);
-                        this.check_status = true;
-                    }
-                },
-                submit_form: function(){
-                    let form_datas = new FormData($('#confirmation')[0]);
-
-                    axios.post('/user-information-submit', form_datas)
-                        .then((res) => {
-                            window.location = '/give-payment/';
-                        })
-                        .catch((err) => {
-                            let errors = err.response.data.errors;
-                        })
-                }
-            }
-        })
-    }
 </script>
 @endpush
 @endsection
