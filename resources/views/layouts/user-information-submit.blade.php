@@ -109,23 +109,23 @@
             el: '#confirmation',
             data: function(){
                 return {
-                  form_data: {
-                    id: null,
-                    registration_number: null,
-                    full_name: null,
-                    phone: null,
-                    email: null,
-                    division: null,
-                    status: null,
-                    ammount: null,
-                    otp: null,
-                    address: null,
-                },
+                    form_data: {
+                        id: null,
+                        registration_number: null,
+                        full_name: null,
+                        phone: null,
+                        email: null,
+                        division: null,
+                        status: null,
+                        ammount: null,
+                        otp: null,
+                        address: null,
+                    },
                     phone: '',
                     otp: '',
                     otp_check_number: '',
                     check_status: false,
-                    
+                    user_amount: '',
                 }
             },
             created: function () {
@@ -164,24 +164,15 @@
                     }
                 },
                 submit_form: function(){
-                    // console.log('sumit action');
-                    // window.location = '/give-payment';
                     let form_datas = new FormData($('#confirmation')[0]);
+
                     axios.post('/user-information-submit', form_datas)
-                    .then((res) => {
-                        console.log(res.data);
-                        // this.form_datas.clear();
-                        // toaster('success', 'Successful.');
-                          window.location = '/give-payment';
-                          // window.location.href = '/give-payment';
-                          // if(response.status === 200) {
-                          // this.$router.push('/give-payment');
-                          // }
-                    })
-                    .catch((err) => {
-                        // console.log(err.response);
-                        let errors = err.response.data.errors;
-                    })
+                        .then((res) => {
+                            window.location = '/give-payment/';
+                        })
+                        .catch((err) => {
+                            let errors = err.response.data.errors;
+                        })
                 }
             }
         })

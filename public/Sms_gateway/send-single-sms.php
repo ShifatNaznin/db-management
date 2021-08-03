@@ -1,10 +1,13 @@
 <?php
 
 require_once __DIR__ . "/lib/AdnSmsNotification.php";
+session_start();
 use AdnSms\AdnSmsNotification;
 
 $number = $_GET["number"];
 $msg = $_GET["message"];
+
+// var_dump($_SESSION['user_amount']);
 
 // $msg = str_replace(array("\r", "\n"),"\r",$msg);
 // var_dump(preg_replace("/\r|\n/","\r",$msg));

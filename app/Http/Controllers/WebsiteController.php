@@ -21,7 +21,7 @@ class WebsiteController extends Controller
         $shurjopay_service = new ShurjopayService();
         $tx_id = $shurjopay_service->generateTxId();
         $success_route = route('order_success_message');
-        $shurjopay_service->sendPayment(5000, $success_route);
+        $shurjopay_service->sendPayment(session()->get('user_amount'), $success_route);
     }
 
     public function index()
@@ -52,6 +52,7 @@ class WebsiteController extends Controller
         // dd($item);
         return view('layouts.user-information-submit', compact('item'));
     }
+
     public function user_information_submit(Request $request)
     {
         $this->validate($request, [
@@ -61,26 +62,36 @@ class WebsiteController extends Controller
             'phone' => 'required',
         ]);
 
+        Session::put('user_information',$request->all());
+
         $data = UserInformation::find($request->id);
-        $data->registration_number = $request->registration_number;
-        $data->full_name = $request->full_name;
-        $data->email = $request->email;
-        $data->phone = $request->phone;
-        $data->division = $request->division;
-        $data->status = 'Paid';
-        $data->ammount = $request->ammount;
-        $data->otp = $request->otp;
-        $data->address = $request->address;
+        Session::put('user_amount',$data->ammount);
 
-        $data->save();
+        // $data->registration_number = $request->registration_number;
+        // $data->full_name = $request->full_name;
+        // $data->email = $request->email;
+        // $data->phone = $request->phone;
+        // $data->division = $request->division;
+        // $data->status = 'Paid';
+        // $data->ammount = $request->ammount;
+        // $data->otp = $request->otp;
+        // $data->address = $request->address;
 
+        // $data->save();
 
-        if ($data) {
-            return back();
-        } else {
-            return back()->with('error', 'value');
-        }
+        return response()->json(
+            [
+                Session::get('user_amount')
+            ]
+        );
+
+        // if ($data) {
+        //     return back();
+        // } else {
+        //     return back()->with('error', 'value');
+        // }
     }
+
     public function contact_msg(Request $request)
     {
         $this->validate($request, [
