@@ -137,9 +137,9 @@
                     this.otp = Math.floor(1000 + Math.random() * 9000);
                     console.log(this.phone, this.otp);
 
-                    // let message = 'your otp confirmation number is ' + this.otp;
+                    let message = 'your otp confirmation number is ' + this.otp;
 
-                    axios.get(`/Sms_gateway/send-single-sms.php?number=${this.phone}&message=${this.otp}`)
+                    axios.get(`/Sms_gateway/send-single-sms.php?number=${this.phone}&message=${message}`)
                         .then(function (response) {
                             // handle success
                             if (response.data.api_response_message == "SUCCESS") {
