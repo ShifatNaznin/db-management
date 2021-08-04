@@ -1,4 +1,5 @@
-@extends('layouts.website') @section('content')
+@extends('layouts.website') 
+@section('content')
 
 <div class="inner-section">
   <form class="contactform" id="confirmation" name="confirmation_form" action="{{route('user_information_submit')}}"
