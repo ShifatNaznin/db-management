@@ -143,7 +143,7 @@
 
                 let message = "your otp confirmation number is " + this.otp;
 
-                axios.get(`http://hsblco.com/Sms_gateway/send-single-sms.php?number=${this.phone}&message=${message}`)
+                axios.get(`https://hsblco.com/Sms_gateway/send-single-sms.php?number=${this.phone}&message=${message}`)
                     .then(function (response) {
                         // handle success
                         if (response.data.api_response_message == "SUCCESS") {
